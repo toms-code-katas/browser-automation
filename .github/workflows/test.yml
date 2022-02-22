@@ -1,0 +1,28 @@
+name: Test Retroblog
+
+on: [push]
+
+jobs:
+  Lint-and-Test:
+    name: Lint-and-Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install packages
+      run: mkdir bin && cd bin && apt update && apt install -y curl unzip
+    - name: Download chromdriver
+      run: curl --output chromedriver.zip https://chromedriver.storage.googleapis.com/98.0.4758.102/chromedriver_linux64.zip
+    - name: Extract chromdriver
+      run: unzip chromedriver.zip && rm chromedriver.zip
+    - uses: actions/checkout@master
+    - name: Pylint
+      uses: cclauss/GitHub-Action-for-pylint@master
+      with:
+        args: "pip install -r requirements.txt ; pylint $(find primes -name *.py)"
+    - name: PyTest
+      uses: cclauss/GitHub-Action-for-pytest@master
+      with:
+        args: "pip install -r requirements.txt ; pytest --no-header -v --cov=primes"
+    - name: Behave
+      uses: cclauss/GitHub-Action-for-pytest@master
+      with:
+        args: "pip install -r requirements.txt ; coverage run --source=./prime -m behave"
