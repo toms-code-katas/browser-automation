@@ -17,12 +17,8 @@ jobs:
     - name: Pylint
       uses: cclauss/GitHub-Action-for-pylint@master
       with:
-        args: "pip install -r requirements.txt ; pylint $(find primes -name *.py)"
+        args: "pip install -r requirements.txt ; python -m pylint ./tests/"
     - name: PyTest
       uses: cclauss/GitHub-Action-for-pytest@master
       with:
-        args: "pip install -r requirements.txt ; pytest --no-header -v --cov=primes"
-    - name: Behave
-      uses: cclauss/GitHub-Action-for-pytest@master
-      with:
-        args: "pip install -r requirements.txt ; coverage run --source=./prime -m behave"
+        args: "pip install -r requirements.txt ; python -m pytest"
