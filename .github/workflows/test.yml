@@ -18,6 +18,7 @@ jobs:
     - name: Extract chromdriver
       run: unzip chromedriver.zip && rm chromedriver.zip
     - name: Pylint
-      run: pip install -r requirements.txt ; python -m pylint $(find tests -name *.py)
-    - name: PyTest
-      run: pip install -r requirements.txt ; python -m pytest
+      # run: pip install -r requirements.txt ; python -m pylint $(find tests -name *.py)
+      run: ls -la && pwd
+#    - name: PyTest
+#      run: pip install -r requirements.txt ; python -m pytest
