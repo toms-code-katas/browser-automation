@@ -19,5 +19,5 @@ jobs:
       run: cd browser-automation/bin && unzip chromedriver.zip && rm chromedriver.zip
     - name: Pylint
       run: cd browser-automation && pip install -r requirements.txt ; python -m pylint $(find tests -name *.py)
-#    - name: PyTest
-#      run: pip install -r requirements.txt ; python -m pytest
+    - name: PyTest
+      run: cd browser-automation && pip install -r requirements.txt ; python -m pytest
